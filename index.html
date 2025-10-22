@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Museo It Akean</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: url('17497035056_381e6dc2a8_o-1024x1024 2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: #B31C5D;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+    }
+
+    /* 3 dots button */
+    .dots-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      padding: 0 30px;
+      margin-right: 20px;
+    }
+
+    /* Dropdown menu */
+    .dropdown {
+      position: absolute;
+      top: 50px;
+      right: 40px;
+      background: #b12267;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      opacity: 0;
+      max-height: 0;
+      transition: all 0.3s ease;
+      padding: 10px 20px;
+      margin-top: 30px;
+    }
+
+    .dropdown.show {
+      opacity: 1;
+      max-height: 100px;
+    }
+
+    .dropdown button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .dropdown button:hover {
+      background-color: #a01955;
+    }
+
+    /* HEADER CENTER */
+    .header-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      margin-left: 85px;
+    }
+
+    .header-center img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .header-center h1 {
+      font-size: 18px;
+      color: white;
+      margin: 0;
+    }
+
+    /* ADMIN DASHBOARD */
+    .admin-container {
+      background-color: rgba(92, 17, 48, 0.7);
+      width: 320px;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .admin-container h2 {
+      margin-bottom: 40px;
+      color: white;
+    }
+
+    .admin-container a,
+    .admin-container button {
+      display: block;
+      background: #B31C5D;
+      color: white;
+      text-decoration: none;
+      padding: 20px 0;
+      width: 60%;
+      margin: 20px auto;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .admin-container a:hover,
+    .admin-container button:hover {
+      background: #9e1753;
+    }
+
+    /* VIDEO MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 30;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #6c2341;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 90%;
+      width: auto;
+      color: white;
+      text-align: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #ccc;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 20px;
+      max-width: 700px;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 600px) {
+      .header-center h1 {
+        font-size: 16px;
+      }
+
+      .admin-container {
+        width: 85%;
+        padding: 25px;
+      }
+
+      .admin-container a,
+      .admin-container button {
+        width: 100%;
+      }
+
+      video {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <!-- CENTER LOGO AND TITLE -->
+    <div class="header-center">
+      <img src="Seal_of_Aklan.png" alt="Museo Logo">
+      <h1>Museo It Akean</h1>
+    </div>
+
+    <!-- RIGHT SIDE DROPDOWN -->
+    <div class="header-right">
+      <button class="dots-btn" id="dotsBtn">⋯</button>
+      <div class="dropdown" id="dropdownMenu">
+        <button onclick="window.location.href='login (1).html'">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ADMIN PAGE -->
+  <div class="admin-container">
+    <h2>Admin Options</h2>
+    <a href="fill-up.html">Fill-up View</a>
+    <button onclick="openVideo()">Users Feedback</button>
+  </div>
+
+  <!-- VIDEO MODAL -->
+  <div id="videoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeVideo()">&times;</span>
+      <h3>User Feedback Video</h3>
+      <video id="feedbackVideo" controls>
+        <source src="1350f502-3404-4018-a290-29068de3c9ed.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <script>
+    const dotsBtn = document.getElementById('dotsBtn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    // Dropdown toggle
+    dotsBtn.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', (e) => {
+      if (!dotsBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
+
+    // Video modal
+    function openVideo() {
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("feedbackVideo");
+      modal.style.display = "flex";
+      video.play();
+    }
+
+    function closeVideo() {
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("feedbackVideo");
+      modal.style.display = "none";
+      video.pause();
+      video.currentTime = 0;
+    }
+
+    // Close modal when clicking outside content
+    window.onclick = function(event) {
+      const modal = document.getElementById("videoModal");
+      if (event.target == modal) {
+        closeVideo();
+      }
+    }
+  </script>
+</body>
+</html>

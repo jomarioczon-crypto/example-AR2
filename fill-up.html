@@ -1,0 +1,175 @@
+<?php
+// ---- DATABASE CONNECTION ----
+$servername = "localhost";
+$username = "root"; // change if different
+$password = "";     // add your MySQL password if any
+$dbname = "museo_db";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// ---- FETCH VISITOR DATA ----
+$sql = "SELECT * FROM visitors ORDER BY id DESC";
+$result = $conn->query($sql);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fill-up View | Museo It Akean</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: url('17497035056_381e6dc2a8_o-1024x1024 2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+    }
+
+    header {
+      background: #B31C5D;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .header-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+    }
+
+    .header-center img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .header-center h1 {
+      font-size: 18px;
+      color: white;
+      margin: 0;
+    }
+
+    .content {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(108, 35, 65, 0.85);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      width: 85%;
+      max-width: 900px;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+
+    .content h2 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      color: white;
+    }
+
+    th, td {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #B31C5D;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 25px;
+      background: #B31C5D;
+      color: white;
+      text-decoration: none;
+      padding: 10px 25px;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    a.back:hover {
+      background: #9e1753;
+    }
+
+    @media (max-width: 600px) {
+      .content {
+        padding: 25px;
+        width: 90%;
+      }
+      .header-center h1 {
+        font-size: 16px;
+      }
+      table, th, td {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-center">
+      <img src="Seal_of_Aklan.png" alt="Museo Logo">
+      <h1>Museo It Akean</h1>
+    </div>
+  </header>
+
+  <div class="content">
+    <h2>Fill-up View</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+
+      //lagay kanalang dto ng codes sa database
+      </tbody>
+    </table>
+
+    <a href="index.html" class="back"> Back</a>
+  </div>
+</body>
+</html>
+
+<?php
+$conn->close();
+?>
